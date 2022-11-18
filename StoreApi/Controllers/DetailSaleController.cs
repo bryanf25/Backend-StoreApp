@@ -24,6 +24,7 @@ namespace StoreApi.Controllers
         {
             try
             {
+                BD.Configuration.ProxyCreationEnabled = false;
                 detailSales = BD.DetailSale.ToList().ToArray();
                 return Ok(detailSales);
             }
@@ -39,6 +40,7 @@ namespace StoreApi.Controllers
         {
             try
             {
+                BD.Configuration.ProxyCreationEnabled = false;
                 detailSale = BD.DetailSale.Find(id);
                 return Ok(detailSale);
             }
@@ -52,6 +54,8 @@ namespace StoreApi.Controllers
         // POST: api/DetailSale
         public IHttpActionResult Post(DetailSale model)
         {
+            BD.Configuration.ProxyCreationEnabled = false;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

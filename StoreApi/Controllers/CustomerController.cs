@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 namespace StoreApi.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+
     public class CustomerController : ApiController
     {
         private StoreEntities BD = new StoreEntities();
@@ -23,6 +24,8 @@ namespace StoreApi.Controllers
         {
             try
             {
+                BD.Configuration.ProxyCreationEnabled = false;
+
                 customers = BD.Customer.ToList().ToArray();
                 return Ok(customers);
             }
@@ -38,6 +41,8 @@ namespace StoreApi.Controllers
         {
             try
             {
+                BD.Configuration.ProxyCreationEnabled = false;
+
                 customer = BD.Customer.Find(id);
                 return Ok(customer);
             }
@@ -72,6 +77,8 @@ namespace StoreApi.Controllers
         // PUT: api/Customer/5
         public IHttpActionResult Put(int id, Customer model)
         {
+            BD.Configuration.ProxyCreationEnabled = false;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

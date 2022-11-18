@@ -19,6 +19,8 @@ namespace StoreApi.Controllers
         private string message;
         private ResponseModel response;
 
+        
+
         // GET: api/Product
         public IHttpActionResult Get()
         {
@@ -40,6 +42,7 @@ namespace StoreApi.Controllers
         {
             try
             {
+                BD.Configuration.ProxyCreationEnabled = false;
                 product = BD.Product.Find(id);
                 return Ok(product);
             }
@@ -74,7 +77,9 @@ namespace StoreApi.Controllers
         // PUT: api/Product/5
         public IHttpActionResult Put( int id,Product model)
         {
-             if (!ModelState.IsValid)
+            BD.Configuration.ProxyCreationEnabled = false;
+
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
